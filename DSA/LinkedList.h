@@ -10,12 +10,14 @@ class LinkedList
 {
 private:
 	Node<T>* head;
+	int size;
 public:
 	LinkedList();
 	void Print();
+	int GetSize();
 	Node<T> *InsertToHead(T _data);
 	Node<T> *InsertToTail(T _data);
-	void InsertAt(int _i, T _data);
+	Node<T> *InsertAt(int _i, T _data);
 	void RemoveAt(int _i);
 };
 
