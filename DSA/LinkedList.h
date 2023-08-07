@@ -18,7 +18,7 @@ public:
 	Node<T> *InsertToHead(T _data);
 	Node<T> *InsertToTail(T _data);
 	Node<T> *InsertAt(int _i, T _data);
-	void RemoveAt(int _i);
+	bool RemoveAt(int _i);
 };
 
 #include "LINKEDLIST.cpp"

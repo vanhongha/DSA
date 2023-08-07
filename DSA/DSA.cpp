@@ -10,6 +10,9 @@ int main()
 	linkedList->InsertToHead(3);
 	linkedList->InsertToTail(4);
 	linkedList->InsertAt(3, 7);
+	linkedList->RemoveAt(4);
+	linkedList->RemoveAt(3);
+	linkedList->RemoveAt(10);
 
 	linkedList->Print();
 }

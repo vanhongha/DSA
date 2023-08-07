@@ -37,15 +37,16 @@ template <typename T>
 Node<T> *LinkedList<T>::InsertAt(int _i, T _data) {
 	if (_i < 0) {
 		cout << "Please enter valid index number!" << endl;
+		return nullptr;
 	}
 
 	if (this->head == nullptr) {
-		cout << "Can not insert at " << _i << " because the linked list is empty!" << endl;
+		cout << "Can not insert into LinkedList at #index " << _i << " because the LinkedList is empty!" << endl;
 		return nullptr;
 	}
 
 	if (_i >= this->size) {
-		cout << "Can not insert at " << _i << " because current linked list only has " << this->size << " elements" << endl << endl;
+		cout << "Can not insert into LinkedList at #index " << _i << " because the LinkedList has only " << this->size << " elements" << endl << endl;
 		return nullptr;
 	}
 
@@ -97,7 +98,7 @@ Node<T>* LinkedList<T>::InsertToTail(T _data) {
 		return this->head;
 	}
 
-	Node<T>* node = head;
+	Node<T>* node = this->head;
 	while (node->GetNextNode() != nullptr) {
 		node = node->GetNextNode();
 	}
@@ -106,4 +107,51 @@ Node<T>* LinkedList<T>::InsertToTail(T _data) {
 
 	return node->GetNextNode();
 }
+
+template <typename T>
+bool LinkedList<T>::RemoveAt(int _i) {
+	if (_i < 0) {
+		cout << "Please enter valid index number!" << endl;
+		return false;
+	}
+
+	if (this->head == nullptr) {
+		cout << "Can not remove node at #index " << _i << " because the LinkedList is empty!" << endl;
+		return false;
+	}
+
+	if (_i >= this->size) {
+		cout << "Can not remove node at #index " << _i << " because the LinkedList only has " << this->size << " elements" << endl << endl;
+		return false;
+	}
+
+	if (_i == 0) {
+		Node<T>* node = this->head;
+		this->head = node->GetNextNode();
+		node->SetNextNode(nullptr);
+		delete(node);
+		this->size--;
+		return true;
+	}
+
+	Node<T>* prev_node = this->head;
+	Node<T>* delete_node = prev_node->GetNextNode();
+	int node_count = 1;
+	while (prev_node != nullptr) {
+		if (node_count >= _i) {
+			break;
+		}
+
+		prev_node = prev_node->GetNextNode();
+		delete_node = prev_node->GetNextNode();
+		node_count++;
+	}
+	prev_node->SetNextNode(delete_node->GetNextNode());
+	delete_node->SetNextNode(nullptr);
+	delete(delete_node);
+	this->size--;
+
+	return true;
+}
+
 #endif
