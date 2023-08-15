@@ -18,8 +18,10 @@ public:
 	Node<T> *InsertToHead(T _data);
 	Node<T> *InsertToTail(T _data);
 	Node<T> *InsertAt(int _i, T _data);
+	Node<T> *GetNodeAt(int _i);
 	bool RemoveAt(int _i);
 	void Reversal();
+	bool IsLooped();
 };
 
 #include "LINKEDLIST.cpp"

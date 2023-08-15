@@ -15,4 +15,10 @@ int main()
 	linkedList->Reversal();
 	linkedList->Print();
 
+	// test loop
+	//Node<int>* temp_node = linkedList->GetNodeAt(3);
+	//cout << temp_node->GetData() << endl;
+	//temp_node->SetNextNode(linkedList->GetNodeAt(0));
+	string check_loop_string = linkedList->IsLooped() ? "Looped" : "Not looped";
+	cout << check_loop_string << endl;
 }

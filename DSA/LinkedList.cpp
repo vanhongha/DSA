@@ -35,7 +35,7 @@ int LinkedList<T>::GetSize() {
 }
 
 template <typename T>
-Node<T> *LinkedList<T>::InsertAt(int _i, T _data) {
+Node<T>* LinkedList<T>::InsertAt(int _i, T _data) {
 	if (_i < 0) {
 		cout << "Please enter valid index number!" << endl;
 		return nullptr;
@@ -76,7 +76,33 @@ Node<T> *LinkedList<T>::InsertAt(int _i, T _data) {
 }
 
 template <typename T>
-Node<T> *LinkedList<T>::InsertToHead(T _data) {
+Node<T>* LinkedList<T>::GetNodeAt(int _i) {
+	if (_i < 0) {
+		cout << "Please enter valid index number!" << endl;
+		return nullptr;
+	}
+
+	if (this->head == nullptr) {
+		cout << "Can not get Node at #index " << _i << " because the LinkedList is empty!" << endl;
+		return nullptr;
+	}
+
+	int count = 0;
+	Node<T>* node = this->head;
+
+	while (node != nullptr) {
+		if (count == _i) {
+			return node;
+		}
+		count++;
+		node = node->GetNextNode();
+	}
+
+	return nullptr;
+}
+
+template <typename T>
+Node<T>* LinkedList<T>::InsertToHead(T _data) {
 	if (this->head == nullptr) {
 		this->head = new Node<T>(_data);
 		this->size++;
@@ -176,7 +202,30 @@ void LinkedList<T>::Reversal() {
 		}
 		next_node = next_node->GetNextNode();
 	}
-	
-}
 
+}
+template<typename T>
+bool LinkedList<T>::IsLooped() {
+	if (this->head == nullptr) {
+		cout << "Linked list is NULL!" << endl;
+		return false;
+	}
+
+	Node<T>* slow_node = this->head;
+	Node<T>* fast_node = this->head;
+
+	while (slow_node != nullptr && fast_node != nullptr) {
+		slow_node = slow_node->GetNextNode();
+		fast_node = fast_node->GetNextNode();
+		if (fast_node == nullptr || fast_node->GetNextNode() == nullptr) {
+			return false;
+		}
+		fast_node = fast_node->GetNextNode();
+		if (slow_node == fast_node) {
+			return true;
+		}
+	}
+
+	return false;
+}
 #endif
