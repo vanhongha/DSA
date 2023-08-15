@@ -19,6 +19,7 @@ public:
 	Node<T> *InsertToTail(T _data);
 	Node<T> *InsertAt(int _i, T _data);
 	bool RemoveAt(int _i);
+	void Reversal();
 };
 
 #include "LINKEDLIST.cpp"

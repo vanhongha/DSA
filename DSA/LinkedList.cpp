@@ -26,6 +26,7 @@ void LinkedList<T>::Print() {
 		cout << node->GetData() << "\t";
 		node = node->GetNextNode();
 	}
+	cout << endl;
 }
 
 template <typename T>
@@ -152,6 +153,30 @@ bool LinkedList<T>::RemoveAt(int _i) {
 	this->size--;
 
 	return true;
+}
+
+template<typename T>
+void LinkedList<T>::Reversal() {
+	if (this->head == nullptr) {
+		cout << "Linked list is NULL!" << endl;
+		return;
+	}
+
+	Node<T>* prev_node = nullptr;
+	Node<T>* cur_node = this->head;
+	Node<T>* next_node = cur_node->GetNextNode();
+
+	while (cur_node != nullptr) {
+		cur_node->SetNextNode(prev_node);
+		prev_node = cur_node;
+		cur_node = next_node;
+		if (next_node == nullptr) {
+			this->head = prev_node;
+			break;
+		}
+		next_node = next_node->GetNextNode();
+	}
+	
 }
 
 #endif
