@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DSA.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>

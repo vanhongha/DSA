@@ -16,11 +16,10 @@ LinkedList<T>::LinkedList()
 template <typename T>
 void LinkedList<T>::Print() {
 	if (this->head == nullptr) {
-		cout << "Linked list is NULL!" << endl;
 		return;
 	}
 
-	cout << "Linked list: ";
+	cout << "List: ";
 	Node<T>* node = this->head;
 	while (node != nullptr) {
 		cout << node->GetData() << "\t";
@@ -42,12 +41,10 @@ Node<T>* LinkedList<T>::InsertAt(int _i, T _data) {
 	}
 
 	if (this->head == nullptr) {
-		cout << "Can not insert into LinkedList at #index " << _i << " because the LinkedList is empty!" << endl;
 		return nullptr;
 	}
 
 	if (_i >= this->size) {
-		cout << "Can not insert into LinkedList at #index " << _i << " because the LinkedList has only " << this->size << " elements" << endl << endl;
 		return nullptr;
 	}
 
@@ -78,12 +75,10 @@ Node<T>* LinkedList<T>::InsertAt(int _i, T _data) {
 template <typename T>
 Node<T>* LinkedList<T>::GetNodeAt(int _i) {
 	if (_i < 0) {
-		cout << "Please enter valid index number!" << endl;
 		return nullptr;
 	}
 
 	if (this->head == nullptr) {
-		cout << "Can not get Node at #index " << _i << " because the LinkedList is empty!" << endl;
 		return nullptr;
 	}
 
@@ -143,12 +138,10 @@ bool LinkedList<T>::RemoveAt(int _i) {
 	}
 
 	if (this->head == nullptr) {
-		cout << "Can not remove node at #index " << _i << " because the LinkedList is empty!" << endl;
 		return false;
 	}
 
 	if (_i >= this->size) {
-		cout << "Can not remove node at #index " << _i << " because the LinkedList only has " << this->size << " elements" << endl << endl;
 		return false;
 	}
 
@@ -184,7 +177,6 @@ bool LinkedList<T>::RemoveAt(int _i) {
 template<typename T>
 void LinkedList<T>::Reversal() {
 	if (this->head == nullptr) {
-		cout << "Linked list is NULL!" << endl;
 		return;
 	}
 
@@ -208,7 +200,6 @@ void LinkedList<T>::Reversal() {
 template<typename T>
 bool LinkedList<T>::IsLooped() {
 	if (this->head == nullptr) {
-		cout << "Linked list is NULL!" << endl;
 		return false;
 	}
 
