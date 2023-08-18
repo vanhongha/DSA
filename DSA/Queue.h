@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+#include "Node.h"
 
 #pragma once
 

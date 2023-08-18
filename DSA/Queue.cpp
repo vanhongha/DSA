@@ -17,7 +17,12 @@ int Queue::Dequeue() {
 		cout << "Queue is empty!";
 		return 0;
 	}
-	return this->list->RemoveAt(0)->GetData();
+
+	Node<int> *front_node = this->list->RemoveAt(0);
+	int value = front_node->GetData();
+	delete(front_node);
+
+	return value;
 }
 
 int Queue::GetFront() {
@@ -25,6 +30,7 @@ int Queue::GetFront() {
 		cout << "Queue is empty!";
 		return 0;
 	}
+
 	return this->list->GetNodeAt(0)->GetData();
 }
 
