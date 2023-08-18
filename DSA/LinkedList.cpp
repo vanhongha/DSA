@@ -204,6 +204,7 @@ void LinkedList<T>::Reversal() {
 	}
 
 }
+
 template<typename T>
 bool LinkedList<T>::IsLooped() {
 	if (this->head == nullptr) {
@@ -227,5 +228,10 @@ bool LinkedList<T>::IsLooped() {
 	}
 
 	return false;
+}
+
+template<typename T>
+bool LinkedList<T>::IsEmpty() {
+	return this->head == nullptr;
 }
 #endif

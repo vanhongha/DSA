@@ -22,6 +22,7 @@ public:
 	bool RemoveAt(int _i);
 	void Reversal();
 	bool IsLooped();
+	bool IsEmpty();
 };
 
 #include "LINKEDLIST.cpp"
