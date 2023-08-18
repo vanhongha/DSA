@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Queue.h"
+#include "Stack.h"
 
 int main()
 {
@@ -14,4 +15,16 @@ int main()
 
 	cout << "Get front: " << queue->GetFront() << endl;
 	queue->Print();
+
+	Stack* stack = new Stack();
+	stack->Push(1);
+	stack->Push(2);
+	stack->Push(3);
+	stack->Print();
+
+	cout << "Pop: " << stack->Pop() << endl;
+	stack->Print();
+
+	cout << "Get top: " << stack->GetTop() << endl;
+	stack->Print();
 }
