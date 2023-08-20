@@ -128,6 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DSA.cpp" />
+    <ClCompile Include="FileHelper.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="import.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileHelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
