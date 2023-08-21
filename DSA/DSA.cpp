@@ -3,11 +3,12 @@
 #include "FileHelper.h"
 #include "Graph.h"
 #include "Queue.h"
+#include "Stack.h"
 using namespace std;
 
 /* PROBLEMS */
 void BreadthFirstSearch(Graph*);
-
+void DepthFirstSearch(Graph*);
 
 int main()
 {
@@ -26,19 +27,20 @@ int main()
     }
     graph->Print();
     BreadthFirstSearch(graph);
+    DepthFirstSearch(graph);
 }
 
 void BreadthFirstSearch(Graph* graph) {
     cout << "Breadth first search: ";
-    int vertical = graph->GetVerticals();
+    int verticals = graph->GetVerticals();
 
-    bool* visited = new bool[vertical];
-    for (int i = 0; i < vertical; i++) {
+    bool* visited = new bool[verticals];
+    for (int i = 0; i < verticals; i++) {
         visited[i] = false;
     }
 
     Queue* queue = new Queue();
-    for (int i = 0; i < vertical; i++) {
+    for (int i = 0; i < verticals; i++) {
         if (!visited[i]) {
             visited[i] = true;
             queue->Enqueue(i);
@@ -50,6 +52,37 @@ void BreadthFirstSearch(Graph* graph) {
         while (node != nullptr) {
             if (!visited[node->GetData()]) {
                 queue->Enqueue(node->GetData());
+                visited[node->GetData()] = true;
+            }
+            node = node->GetNextNode();
+        }
+    }
+
+    cout << endl;
+}
+
+void DepthFirstSearch(Graph* graph) {
+    cout << "Depth first search: ";
+    int verticals = graph->GetVerticals();
+
+    bool* visited = new bool[verticals];
+    for (int i = 0; i < verticals; i++) {
+        visited[i] = false;
+    }
+
+    Stack* stack = new Stack();
+    for (int i = 0; i < verticals; i++) {
+        if (!visited[i]) {
+            stack->Push(i);
+            visited[i] = true;
+        }
+
+        int node_num = stack->Pop();
+        cout << "\t" << node_num;
+        Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
+        while (node != nullptr) {
+            if (!visited[node->GetData()]) {
+                stack->Push(node->GetData());
                 visited[node->GetData()] = true;
             }
             node = node->GetNextNode();
