@@ -33,3 +33,11 @@ void Graph::Print() {
 		cout << "NULL" << endl;
 	}
 }
+
+int Graph::GetVerticals() {
+	return this->verticals;
+}
+
+LinkedList<int>* Graph::GetArrayList() {
+	return this->array_list;
+}

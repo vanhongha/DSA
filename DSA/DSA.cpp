@@ -2,7 +2,12 @@
 #include <sstream>
 #include "FileHelper.h"
 #include "Graph.h"
+#include "Queue.h"
 using namespace std;
+
+/* PROBLEMS */
+void BreadthFirstSearch(Graph*);
+
 
 int main()
 {
@@ -20,4 +25,36 @@ int main()
         }
     }
     graph->Print();
+    BreadthFirstSearch(graph);
+}
+
+void BreadthFirstSearch(Graph* graph) {
+    cout << "Breadth first search: ";
+    int vertical = graph->GetVerticals();
+
+    bool* visited = new bool[vertical];
+    for (int i = 0; i < vertical; i++) {
+        visited[i] = false;
+    }
+
+    Queue* queue = new Queue();
+    for (int i = 0; i < vertical; i++) {
+        if (!visited[i]) {
+            visited[i] = true;
+            queue->Enqueue(i);
+        }
+
+        int node_num = queue->Dequeue();
+        cout << "\t" << node_num;
+        Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
+        while (node != nullptr) {
+            if (!visited[node->GetData()]) {
+                queue->Enqueue(node->GetData());
+                visited[node->GetData()] = true;
+            }
+            node = node->GetNextNode();
+        }
+    }
+
+    cout << endl;
 }

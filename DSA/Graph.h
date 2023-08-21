@@ -10,4 +10,6 @@ public:
 	Graph(int);
 	void AddEdge(int vertex, int edge);
 	void Print(); // Print as Adjacency list
+	int GetVerticals();
+	LinkedList<int>* GetArrayList();
 };
