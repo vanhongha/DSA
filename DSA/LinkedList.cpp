@@ -22,7 +22,7 @@ void LinkedList<T>::Print() {
 	cout << "List: ";
 	Node<T>* node = this->head;
 	while (node != nullptr) {
-		cout << node->GetData() << "\t";
+		cout << "\t" << node->GetData();
 		node = node->GetNextNode();
 	}
 	cout << endl;
@@ -131,27 +131,26 @@ Node<T>* LinkedList<T>::InsertToTail(T _data) {
 }
 
 template <typename T>
-bool LinkedList<T>::RemoveAt(int _i) {
+Node<T>* LinkedList<T>::RemoveAt(int _i) {
 	if (_i < 0) {
 		cout << "Please enter valid index number!" << endl;
-		return false;
+		return nullptr;
 	}
 
 	if (this->head == nullptr) {
-		return false;
+		return nullptr;
 	}
 
 	if (_i >= this->size) {
-		return false;
+		return nullptr;
 	}
 
 	if (_i == 0) {
 		Node<T>* node = this->head;
 		this->head = node->GetNextNode();
 		node->SetNextNode(nullptr);
-		delete(node);
 		this->size--;
-		return true;
+		return node;
 	}
 
 	Node<T>* prev_node = this->head;
@@ -168,10 +167,9 @@ bool LinkedList<T>::RemoveAt(int _i) {
 	}
 	prev_node->SetNextNode(delete_node->GetNextNode());
 	delete_node->SetNextNode(nullptr);
-	delete(delete_node);
 	this->size--;
 
-	return true;
+	return delete_node;
 }
 
 template<typename T>
