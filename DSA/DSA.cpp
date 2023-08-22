@@ -9,6 +9,7 @@ using namespace std;
 /* PROBLEMS */
 void BreadthFirstSearch(Graph*);
 void DepthFirstSearch(Graph*);
+bool IsCycled(Graph*);
 
 int main()
 {
@@ -28,6 +29,13 @@ int main()
     graph->Print();
     BreadthFirstSearch(graph);
     DepthFirstSearch(graph);
+
+    if (IsCycled(graph)) {
+        cout << "Graph is cycled" << endl;
+    }
+    else {
+        cout << "Graph is not cycled" << endl;
+    }
 }
 
 void BreadthFirstSearch(Graph* graph) {
@@ -90,4 +98,34 @@ void DepthFirstSearch(Graph* graph) {
     }
 
     cout << endl;
+}
+
+bool IsCycled(Graph* graph) {
+    int verticals = graph->GetVerticals();
+
+    bool* visited = new bool[verticals];
+    for (int i = 0; i < verticals; i++) {
+        visited[i] = false;
+    }
+
+    Stack* stack = new Stack();
+    for (int i = 0; i < verticals; i++) {
+        if (!visited[i]) {
+            visited[i] = true;
+            stack->Push(i);
+        }
+
+        int node_num = stack->Pop();
+        Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
+        while (node != nullptr) {
+            if (visited[node->GetData()]) {
+                return true;
+            }
+            stack->Push(node->GetData());
+            visited[node->GetData()] = true;
+            node = node->GetNextNode();
+        }
+    }
+
+    return false;
 }
