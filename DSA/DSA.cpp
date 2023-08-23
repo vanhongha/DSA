@@ -278,8 +278,9 @@ bool HasPath(Graph* graph, int source, int destination) {
 }
 
 bool IsTree(Graph* graph) {
-    // TODO:    count how many isolated components
-    //          if there are more than 1 isolated component => there is not a tree
+    if (CountComponents(graph) > 1) {
+        return false;
+    }
 
     int vertices = graph->GetVertices();
     int* visited_count = new int[vertices];
