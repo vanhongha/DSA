@@ -11,6 +11,7 @@ void BreadthFirstSearch(Graph*);
 void DepthFirstSearch(Graph*);
 bool IsCycled(Graph*);
 vector<int> FindMotherVertex(Graph*); // TODO: find all mother vertex in another unconnected components
+int CountEdge(Graph*);
 
 int main()
 {
@@ -39,6 +40,8 @@ int main()
     }
 
     FindMotherVertex(graph);
+
+    cout << "Number of edges: " << CountEdge(graph) << endl;
 }
 
 void BreadthFirstSearch(Graph* graph) {
@@ -170,6 +173,22 @@ vector<int> FindMotherVertex(Graph* graph) {
             cout << "\t" << i;
         }
     }
+    cout << endl;
 
     return result;
+}
+
+int CountEdge(Graph* graph) {
+    int edge = 0;
+    int verticals = graph->GetVerticals();
+
+    for (int i = 0; i < verticals; i++) {
+        Node<int>* node = graph->GetArrayList()[i].GetNodeAt(0);
+        while (node != nullptr) {
+            edge++;
+            node = node->GetNextNode();
+        }
+    }
+
+    return edge;
 }
