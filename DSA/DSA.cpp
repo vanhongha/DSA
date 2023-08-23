@@ -12,6 +12,7 @@ void DepthFirstSearch(Graph*);
 bool IsCycled(Graph*);
 vector<int> FindMotherVertex(Graph*); // TODO: find all mother vertex in another unconnected components
 int CountEdge(Graph*);
+int CountComponents(Graph*);
 bool HasPath(Graph*, int source, int destination);
 bool IsTree(Graph*);
 
@@ -44,7 +45,7 @@ int main()
     FindMotherVertex(graph);
 
     cout << "Number of edges: " << CountEdge(graph) << endl;
-
+    cout << "There are " << CountComponents(graph) << " components" << endl;
     int source = 1;
     int destination = 0;
     if (HasPath(graph, source, destination)) {
@@ -209,6 +210,38 @@ int CountEdge(Graph* graph) {
     }
 
     return edge;
+}
+
+int CountComponents(Graph* graph) {
+    int result = 0;
+
+    int vertices = graph->GetVertices();
+    bool* visited = new bool[vertices];
+    for (int i = 0; i < vertices; i++) {
+        visited[i] = false;
+    }
+
+    Stack* stack = new Stack();
+    for (int i = 0; i < vertices; i++) {
+        if (!visited[i]) {
+            result++;
+            stack->Push(i);
+            visited[i] = true;
+        }
+
+        int node_num = stack->Pop();
+        Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
+        while (node != nullptr) {
+            if (!visited[node->GetData()]) {
+                stack->Push(node->GetData());
+                visited[node->GetData()] = true;
+            }
+
+            node = node->GetNextNode();
+        }
+    }
+
+    return result;
 }
 
 bool HasPath(Graph* graph, int source, int destination) {
