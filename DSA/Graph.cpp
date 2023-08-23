@@ -1,19 +1,19 @@
 ﻿#include "Graph.h"
 #include "LinkedList.h"
 
-Graph::Graph(int _verticals) {
-	array_list = new LinkedList<int>[_verticals];
-	this->verticals = _verticals;
+Graph::Graph(int _vertices) {
+	array_list = new LinkedList<int>[_vertices];
+	this->vertices = _vertices;
 }
 
 void Graph::AddEdge(int vertex, int edge) {
-	if (vertex >= verticals) {
-		cout << "Please enter vertex smaller than number of verticals" << endl;
+	if (vertex >= vertices) {
+		cout << "Please enter vertex smaller than number of vertices" << endl;
 		return;
 	}
 
-	if (edge >= verticals) {
-		cout << "Please enter edge smaller than number of verticals" << endl;
+	if (edge >= vertices) {
+		cout << "Please enter edge smaller than number of vertices" << endl;
 		return;
 	}
 
@@ -21,7 +21,7 @@ void Graph::AddEdge(int vertex, int edge) {
 }
 
 void Graph::Print() {
-	for (int i = 0; i < this->verticals; i++) {
+	for (int i = 0; i < this->vertices; i++) {
 		LinkedList<int> list = this->array_list[i];
 		Node<int> *node = list.GetNodeAt(0);
 
@@ -34,8 +34,8 @@ void Graph::Print() {
 	}
 }
 
-int Graph::GetVerticals() {
-	return this->verticals;
+int Graph::GetVertices() {
+	return this->vertices;
 }
 
 LinkedList<int>* Graph::GetArrayList() {

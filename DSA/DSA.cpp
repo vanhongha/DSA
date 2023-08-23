@@ -18,10 +18,10 @@ bool IsTree(Graph*);
 int main()
 {
 	vector<string> lines = FileHelper::ReadFile("import.txt");
-    int verticals = stoi(lines[0]);
+    int vertices = stoi(lines[0]);
     string segment;
 
-    Graph* graph = new Graph(verticals);
+    Graph* graph = new Graph(vertices);
     for (int i = 1; i < lines.size(); i++) {
         if (lines[i].size() > 0) {
             stringstream ss(lines[i]);
@@ -64,15 +64,15 @@ int main()
 
 void BreadthFirstSearch(Graph* graph) {
     cout << "Breadth first search: ";
-    int verticals = graph->GetVerticals();
+    int vertices = graph->GetVertices();
 
-    bool* visited = new bool[verticals];
-    for (int i = 0; i < verticals; i++) {
+    bool* visited = new bool[vertices];
+    for (int i = 0; i < vertices; i++) {
         visited[i] = false;
     }
 
     Queue* queue = new Queue();
-    for (int i = 0; i < verticals; i++) {
+    for (int i = 0; i < vertices; i++) {
         if (!visited[i]) {
             visited[i] = true;
             queue->Enqueue(i);
@@ -95,15 +95,15 @@ void BreadthFirstSearch(Graph* graph) {
 
 void DepthFirstSearch(Graph* graph) {
     cout << "Depth first search: ";
-    int verticals = graph->GetVerticals();
+    int vertices = graph->GetVertices();
 
-    bool* visited = new bool[verticals];
-    for (int i = 0; i < verticals; i++) {
+    bool* visited = new bool[vertices];
+    for (int i = 0; i < vertices; i++) {
         visited[i] = false;
     }
 
     Stack* stack = new Stack();
-    for (int i = 0; i < verticals; i++) {
+    for (int i = 0; i < vertices; i++) {
         if (!visited[i]) {
             stack->Push(i);
             visited[i] = true;
@@ -125,15 +125,15 @@ void DepthFirstSearch(Graph* graph) {
 }
 
 bool IsCycled(Graph* graph) {
-    int verticals = graph->GetVerticals();
+    int vertices = graph->GetVertices();
 
-    bool* visited = new bool[verticals];
-    for (int i = 0; i < verticals; i++) {
+    bool* visited = new bool[vertices];
+    for (int i = 0; i < vertices; i++) {
         visited[i] = false;
     }
 
     Stack* stack = new Stack();
-    for (int i = 0; i < verticals; i++) {
+    for (int i = 0; i < vertices; i++) {
         if (!visited[i]) {
             visited[i] = true;
             stack->Push(i);
@@ -156,16 +156,16 @@ bool IsCycled(Graph* graph) {
 
 vector<int> FindMotherVertex(Graph* graph) {
     vector<int> result;
-    int verticals = graph->GetVerticals();
+    int vertices = graph->GetVertices();
 
-    int* visited_count = new int[verticals];
+    int* visited_count = new int[vertices];
 
-    for (int i = 0; i < verticals; i++) {
+    for (int i = 0; i < vertices; i++) {
         visited_count[i] = 0;
     }
 
     Stack* stack = new Stack();
-    for (int i = 0; i < verticals; i++) {
+    for (int i = 0; i < vertices; i++) {
         stack->Push(i);
 
         int node_num = stack->Pop();
@@ -178,14 +178,14 @@ vector<int> FindMotherVertex(Graph* graph) {
     }
 
     int min_visited_count = visited_count[0];
-    for (int i = 1; i < verticals; i++) {
+    for (int i = 1; i < vertices; i++) {
         if (visited_count[i] < min_visited_count) {
             min_visited_count = visited_count[i];
         }
     }
 
     cout << "List mother vertex: ";
-    for (int i = 0; i < verticals;i++) {
+    for (int i = 0; i < vertices;i++) {
         if (visited_count[i] == min_visited_count) {
             result.push_back(i);
             cout << "\t" << i;
@@ -198,9 +198,9 @@ vector<int> FindMotherVertex(Graph* graph) {
 
 int CountEdge(Graph* graph) {
     int edge = 0;
-    int verticals = graph->GetVerticals();
+    int vertices = graph->GetVertices();
 
-    for (int i = 0; i < verticals; i++) {
+    for (int i = 0; i < vertices; i++) {
         Node<int>* node = graph->GetArrayList()[i].GetNodeAt(0);
         while (node != nullptr) {
             edge++;
@@ -212,13 +212,13 @@ int CountEdge(Graph* graph) {
 }
 
 bool HasPath(Graph* graph, int source, int destination) {
-    int verticals = graph->GetVerticals();
-    if (source >= verticals || destination >= verticals) {
+    int vertices = graph->GetVertices();
+    if (source >= vertices || destination >= vertices) {
         return false;
     }
 
-    bool* visited = new bool[verticals];
-    for (int i = 0; i < verticals; i++) {
+    bool* visited = new bool[vertices];
+    for (int i = 0; i < vertices; i++) {
         visited[i] = false;
     }
 
@@ -248,14 +248,14 @@ bool IsTree(Graph* graph) {
     // TODO:    count how many isolated components
     //          if there are more than 1 isolated component => there is not a tree
 
-    int verticals = graph->GetVerticals();
-    int* visited_count = new int[verticals];
-    for (int i = 0; i < verticals; i++) {
+    int vertices = graph->GetVertices();
+    int* visited_count = new int[vertices];
+    for (int i = 0; i < vertices; i++) {
         visited_count[i] = 0;
     }
 
     Queue* queue = new Queue();
-    for (int i = 0; i < verticals;i++) {
+    for (int i = 0; i < vertices;i++) {
         queue->Enqueue(i);
 
         int node_num = queue->Dequeue();
