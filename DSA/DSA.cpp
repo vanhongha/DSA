@@ -10,6 +10,7 @@ using namespace std;
 void BreadthFirstSearch(Graph*);
 void DepthFirstSearch(Graph*);
 bool IsCycled(Graph*);
+vector<int> FindMotherVertex(Graph*); // TODO: find all mother vertex in another unconnected components
 
 int main()
 {
@@ -36,6 +37,8 @@ int main()
     else {
         cout << "Graph is not cycled" << endl;
     }
+
+    FindMotherVertex(graph);
 }
 
 void BreadthFirstSearch(Graph* graph) {
@@ -128,4 +131,45 @@ bool IsCycled(Graph* graph) {
     }
 
     return false;
+}
+
+vector<int> FindMotherVertex(Graph* graph) {
+    vector<int> result;
+    int verticals = graph->GetVerticals();
+
+    int* visited_count = new int[verticals];
+
+    for (int i = 0; i < verticals; i++) {
+        visited_count[i] = 0;
+    }
+
+    Stack* stack = new Stack();
+    for (int i = 0; i < verticals; i++) {
+        stack->Push(i);
+
+        int node_num = stack->Pop();
+        visited_count[node_num]++;
+        Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
+        while (node != nullptr) {
+            visited_count[node->GetData()]++;
+            node = node->GetNextNode();
+        }
+    }
+
+    int min_visited_count = visited_count[0];
+    for (int i = 1; i < verticals; i++) {
+        if (visited_count[i] < min_visited_count) {
+            min_visited_count = visited_count[i];
+        }
+    }
+
+    cout << "List mother vertex: ";
+    for (int i = 0; i < verticals;i++) {
+        if (visited_count[i] == min_visited_count) {
+            result.push_back(i);
+            cout << "\t" << i;
+        }
+    }
+
+    return result;
 }
