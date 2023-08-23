@@ -44,8 +44,8 @@ int main()
 
     cout << "Number of edges: " << CountEdge(graph) << endl;
 
-    int source = 0;
-    int destination = 4;
+    int source = 1;
+    int destination = 0;
     if (HasPath(graph, source, destination)) {
         cout << "There are paths from " << source << " to " << destination << endl;
     }
@@ -209,17 +209,26 @@ bool HasPath(Graph* graph, int source, int destination) {
         return false;
     }
 
+    bool* visited = new bool[verticals];
+    for (int i = 0; i < verticals; i++) {
+        visited[i] = false;
+    }
+
     Stack* stack = new Stack();
     stack->Push(source);
     while (!stack->IsEmpty()) {
         int node_num = stack->Pop();
+        visited[node_num] = true;
+
         if (node_num == destination) {
             return true;
         }
 
         Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
         while (node != nullptr) {
-            stack->Push(node->GetData());
+            if (!visited[node->GetData()]) {
+                stack->Push(node->GetData());
+            }
             node = node->GetNextNode();
         }
     }
