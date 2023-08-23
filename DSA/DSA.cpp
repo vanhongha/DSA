@@ -13,6 +13,7 @@ bool IsCycled(Graph*);
 vector<int> FindMotherVertex(Graph*); // TODO: find all mother vertex in another unconnected components
 int CountEdge(Graph*);
 bool HasPath(Graph*, int source, int destination);
+bool IsTree(Graph*);
 
 int main()
 {
@@ -51,6 +52,13 @@ int main()
     }
     else {
         cout << "There is no path from " << source << " to " << destination << endl;
+    }
+
+    if (IsTree(graph)) {
+        cout << "The graph is a tree" << endl;
+    }
+    else {
+        cout << "The graph is not a tree" << endl;
     }
 }
 
@@ -234,4 +242,32 @@ bool HasPath(Graph* graph, int source, int destination) {
     }
 
     return false;
+}
+
+bool IsTree(Graph* graph) {
+    // TODO:    count how many isolated components
+    //          if there are more than 1 isolated component => there is not a tree
+
+    int verticals = graph->GetVerticals();
+    int* visited_count = new int[verticals];
+    for (int i = 0; i < verticals; i++) {
+        visited_count[i] = 0;
+    }
+
+    Queue* queue = new Queue();
+    for (int i = 0; i < verticals;i++) {
+        queue->Enqueue(i);
+
+        int node_num = queue->Dequeue();
+        Node<int>* node = graph->GetArrayList()[node_num].GetNodeAt(0);
+        while (node != nullptr) {
+            visited_count[node->GetData()]++;
+            if (visited_count[node->GetData()] > 1) {
+                return false;
+            }
+            node = node->GetNextNode();
+        }
+    }
+
+    return true;
 }
