@@ -91,6 +91,8 @@ void BreadthFirstSearch(Graph* graph) {
         }
     }
 
+    delete[] visited;
+
     cout << endl;
 }
 
@@ -122,6 +124,8 @@ void DepthFirstSearch(Graph* graph) {
         }
     }
 
+    delete[] visited;
+
     cout << endl;
 }
 
@@ -152,6 +156,7 @@ bool IsCycled(Graph* graph) {
         }
     }
 
+    delete[] visited;
     return false;
 }
 
@@ -193,6 +198,8 @@ vector<int> FindMotherVertex(Graph* graph) {
         }
     }
     cout << endl;
+
+    delete[] visited_count;
 
     return result;
 }
@@ -241,6 +248,8 @@ int CountComponents(Graph* graph) {
         }
     }
 
+    delete[] visited;
+
     return result;
 }
 
@@ -262,6 +271,7 @@ bool HasPath(Graph* graph, int source, int destination) {
         visited[node_num] = true;
 
         if (node_num == destination) {
+            delete[] visited;
             return true;
         }
 
@@ -274,6 +284,7 @@ bool HasPath(Graph* graph, int source, int destination) {
         }
     }
 
+    delete[] visited;
     return false;
 }
 
@@ -297,11 +308,13 @@ bool IsTree(Graph* graph) {
         while (node != nullptr) {
             visited_count[node->GetData()]++;
             if (visited_count[node->GetData()] > 1) {
+                delete[] visited_count;
                 return false;
             }
             node = node->GetNextNode();
         }
     }
 
+    delete[] visited_count;
     return true;
 }
