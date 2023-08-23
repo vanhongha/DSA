@@ -4,10 +4,11 @@
 
 class Graph {
 private:
-	int verticals;
+	int vertices;
 	LinkedList<int>* array_list;
 public:
 	Graph(int);
 	void AddEdge(int vertex, int edge);
 	void Print(); // Print as Adjacency list
+	int GetVertices();
 };
