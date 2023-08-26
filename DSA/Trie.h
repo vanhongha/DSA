@@ -12,4 +12,5 @@ public:
 	int GetIndex(char);
 	void Insert(string);
 	bool Search(string);
+	bool Delete(string);
 };

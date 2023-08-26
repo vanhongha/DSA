@@ -45,3 +45,20 @@ bool Trie::Search(string s) {
 
 	return false;
 }
+
+bool Trie::Delete(string s) {
+	TrieNode* node = this->root;
+	for (int i = 0; i < s.size(); i++) {
+		char c = tolower(s[i]);
+		int index = GetIndex(c);
+		if (node->GetChild(index) == nullptr) {
+			return false;
+		}
+		node = node->GetChild(index);
+		if (i == s.size() - 1 && node->IsEnd()) {
+			node->SetEnd(false);
+			return true;
+		}
+	}
+	return false;
+}
